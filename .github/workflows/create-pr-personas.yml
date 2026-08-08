@@ -1,0 +1,36 @@
+name: Create PR for personas updates
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create pull request for personas updates
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: Add personas and process improvements: QA, Technical Architect, Security, Scrum Master, Stakeholder
+          body: |
+            This PR implements the process improvements requested in #4 by expanding the personas documentation and adding a small template to help teams capture role responsibilities.
+
+            What I changed
+            - Updated docs/octoacme-roles-and-personas.md to add sections for:
+              - QA / Testing Lead
+              - Technical Architect
+              - Security / Compliance Officer
+              - Scrum Master / Agile Coach
+              - Stakeholder / Sponsor
+            - Added docs/templates/persona-checklist.md — a short checklist teams can use to capture role-specific onboarding and responsibilities.
+            - Added docs/process-improvements/README.md — changelog + rationale linking to the issue.
+
+            Related issue: https://github.com/anastasiia-onoiko/skills-scale-institutional-knowledge-using-copilot-spaces/issues/4
+          base: main
+          head: add-personas-and-process-improvements
+          reviewers: anastasiia-onoiko
+          labels: documentation,process improvement
